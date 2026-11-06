@@ -1,34 +1,21 @@
 package step03;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] nums = new int[2];
-        ArithmeticCalculator calculator = new ArithmeticCalculator();
+        double[] nums = new double[2];
+        ArithmeticCalculator<Double> calculator = new ArithmeticCalculator<>();
 
-        System.out.println("양의 정수 계산기");
-        System.out.println("두 개의 양의 정수 및 사칙연산기호 (+, -, *, /)를 입력하면 계산합니다.");
+        System.out.println("실수 계산기");
+        System.out.println("두 개의 실수 및 사칙연산기호 (+, -, *, /)를 입력하면 계산합니다.");
 
         while(true) {
             for(int i = 0; i < nums.length; i++) {
-                while (true) {
-                    System.out.print(((i == 0) ? "첫 번째" : "두 번째") + " 숫자를 입력하세요: ");
-
-                    if(!sc.hasNextInt()) {
-                        System.out.println("유효한 정수를 입력하세요.");
-                        sc.next();
-                        continue;
-                    }
-
-                    nums[i] = sc.nextInt();
-
-                    if (nums[i] >= 0) {
-                        break;
-                    }
-                    System.out.println("유효한 정수를 입력하세요.");
-                }
+                System.out.print(((i == 0) ? "첫 번째" : "두 번째") + " 숫자를 입력하세요: ");
+                nums[i] = sc.nextDouble();
             }
 
             boolean loop = true;
@@ -47,14 +34,23 @@ public class App {
 
                 try {
                     double result = calculator.calculate(nums[0], nums[1], operator);
-                    System.out.println("결과: " + result);
+                    System.out.printf("결과: %.2f\n", result);
                     break;
                 } catch (ArithmeticException e) {
                     System.out.println(e.getMessage());
                 }
             }
             
-            System.out.println("현재 저장된 결과: " + calculator.getResults());
+            System.out.print("현재 저장된 결과: [");
+            ArrayList<Double> list = calculator.getResults();
+            for (int i = 0; i < list.size(); i++) {
+                System.out.printf("%.2f", list.get(i));
+                if (i < list.size() - 1) {
+                    System.out.print(", ");
+                }
+            }
+            System.out.println("]");
+
             System.out.println("가장 오래된 결과를 제거하겠습니까? (y/n)");
             if (sc.next().equals("y")) {
                 calculator.removeResults();
@@ -62,6 +58,7 @@ public class App {
             } else {
                 System.out.println("제거하지 않고 넘어갑니다.");
             }
+            
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             if (sc.next().equals("exit")) {
                 break;

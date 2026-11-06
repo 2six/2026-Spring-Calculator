@@ -2,40 +2,50 @@ package step03;
 
 import java.util.ArrayList;
 
-public class ArithmeticCalculator {
+public class ArithmeticCalculator<T extends Number> {
 
-    private ArrayList<Double> results = new ArrayList<>();
+    private ArrayList<T> results = new ArrayList<>();
 
-    public double calculate(int num1, int num2, char operator) {
-        OperatorType operatorType = switch (operator) {
-            case '+' -> OperatorType.ADD;
-            case '-' -> OperatorType.SUB;
-            case '*' -> OperatorType.MUL;
-            case '/' -> OperatorType.DIV;
-            default -> throw new IllegalArgumentException("유효하지 않은 연산자입니다.");
-        };
-
-        double result = switch (operatorType) {
-            case ADD -> num1 + num2;
-            case SUB -> num1 - num2;
-            case MUL -> num1 * num2;
+    public T calculate(T num1, T num2, char operator) {
+        OperatorType operatorType = OperatorType.charToOperatorType(operator);
+        
+        double n1 = num1.doubleValue();
+        double n2 = num2.doubleValue();
+        double result = 0;
+        switch (operatorType) {
+            case ADD -> result = n1 + n2;
+            case SUB -> result = n1 - n2;
+            case MUL -> result = n1 * n2;
             case DIV -> {
-                if (num2 != 0) {
-                    yield (double) num1 / num2;
+                if (n2 != 0) {
+                    result = n1 / n2;
                 } else {
                     throw new ArithmeticException("0으로 나눌 수 없습니다.");
                 }
             }
-        };
-        results.add(result);
-        return result;
+        }
+
+        T finalResult;
+
+        if (num1 instanceof Integer) {
+            finalResult = (T) Integer.valueOf((int) result);
+        } else if (num1 instanceof Long) {
+            finalResult = (T) Long.valueOf((long) result);
+        } else if (num1 instanceof Double) {
+            finalResult = (T) Double.valueOf(result);
+        } else {
+            throw new IllegalArgumentException("유효하지 않은 타입입니다.");
+        }
+
+        results.add(finalResult);
+        return finalResult;
     }
 
-    public ArrayList<Double> getResults() {
+    public ArrayList<T> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<Double> results) {
+    public void setResults(ArrayList<T> results) {
         this.results = results;
     }
 
