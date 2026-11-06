@@ -39,7 +39,6 @@ public class App {
                 
                 switch (operator) {
                     case '+', '-', '*', '/':
-                        loop = false;
                         break;
                     default:
                         System.out.println("유효한 연산자를 입력하세요.");
