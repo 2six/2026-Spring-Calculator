@@ -38,17 +38,17 @@ public class App {
                 char operator = sc.next().charAt(0);
                 
                 switch (operator) {
-                    case '+', '-', '*', '/':
-                        break;
-                    default:
+                    case '+', '-', '*', '/' -> {}
+                    default -> {
                         System.out.println("유효한 연산자를 입력하세요.");
                         continue;
+                    }
                 }
 
                 try {
                     double result = calculator.calculate(nums[0], nums[1], operator);
                     System.out.println("결과: " + result);
-                    loop = false;
+                    break;
                 } catch (ArithmeticException e) {
                     System.out.println(e.getMessage());
                 }
