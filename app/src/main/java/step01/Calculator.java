@@ -28,5 +28,29 @@ public class Calculator {
                 System.out.println("유효한 정수를 입력하세요.");
             }
         }
+
+        boolean loop = true;
+
+        while (loop) {
+            System.out.print("사칙연산 기호를 입력하세요: ");
+            char operator = sc.next().charAt(0);
+
+            switch (operator) {
+                case '+', '-','*':
+                    loop = false;
+                    break;
+                case '/':
+                    if (nums[1] != 0) {
+                        loop = false;
+                        break;
+                    } else {
+                        System.out.println("0으로 나눌 수 없습니다.");
+                        continue;
+                    }
+                default:
+                    System.out.println("유효한 연산자를 입력하세요.");
+                    continue;
+            }
+        }
     }
 }
