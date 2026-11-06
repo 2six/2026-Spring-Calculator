@@ -30,10 +30,11 @@ public class Calculator {
         }
 
         boolean loop = true;
+        char operator = ' ';
 
         while (loop) {
             System.out.print("사칙연산 기호를 입력하세요: ");
-            char operator = sc.next().charAt(0);
+            operator = sc.next().charAt(0);
 
             switch (operator) {
                 case '+', '-','*':
@@ -52,5 +53,22 @@ public class Calculator {
                     continue;
             }
         }
+
+        int result = 0;
+        switch (operator) {
+            case '+':
+                result = nums[0] + nums[1];
+                break;
+            case '-':
+                result = nums[0] - nums[1];
+                break;
+            case '*':
+                result = nums[0] * nums[1];
+                break;
+            case '/':
+                result = nums[0] / nums[1];
+                break;
+        }
+        System.out.println("결과: " + result);
     }
 }
