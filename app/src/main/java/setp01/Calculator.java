@@ -13,6 +13,13 @@ public class Calculator {
         for(int i = 0; i < nums.length; i++) {
             while (true) {
                 System.out.print(((i == 0) ? "첫 번째" : "두 번째") + " 숫자를 입력하세요: ");
+
+                if(!sc.hasNextInt()) {
+                    System.out.println("유효한 정수를 입력하세요.");
+                    sc.next();
+                    continue;
+                }
+
                 nums[i] = sc.nextInt();
 
                 if (nums[i] >= 0) {
