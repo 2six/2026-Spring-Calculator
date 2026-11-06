@@ -18,7 +18,9 @@ public class Calculator {
                     throw new ArithmeticException("0으로 나눌 수 없습니다.");
                 }
             }
-            default -> 0;
+            default -> {
+                throw new IllegalArgumentException("유효하지 않은 연산자입니다.");
+            }
         };
         results.add(result);
         return result;
