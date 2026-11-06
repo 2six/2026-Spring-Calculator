@@ -36,13 +36,24 @@ public class Calculator {
             System.out.print("사칙연산 기호를 입력하세요: ");
             operator = sc.next().charAt(0);
 
+            int result = 0;
             switch (operator) {
-                case '+', '-','*':
+                case '+':
                     loop = false;
+                    result = nums[0] + nums[1];
+                    break;
+                case '-':
+                    loop = false;
+                    result = nums[0] - nums[1];
+                    break;
+                case '*':
+                    loop = false;
+                    result = nums[0] * nums[1];
                     break;
                 case '/':
                     if (nums[1] != 0) {
                         loop = false;
+                        result = nums[0] / nums[1];
                         break;
                     } else {
                         System.out.println("0으로 나눌 수 없습니다.");
@@ -52,23 +63,7 @@ public class Calculator {
                     System.out.println("유효한 연산자를 입력하세요.");
                     continue;
             }
+            System.out.println("결과: " + result);
         }
-
-        int result = 0;
-        switch (operator) {
-            case '+':
-                result = nums[0] + nums[1];
-                break;
-            case '-':
-                result = nums[0] - nums[1];
-                break;
-            case '*':
-                result = nums[0] * nums[1];
-                break;
-            case '/':
-                result = nums[0] / nums[1];
-                break;
-        }
-        System.out.println("결과: " + result);
     }
 }
