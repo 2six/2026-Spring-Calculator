@@ -37,7 +37,7 @@ public class Calculator {
                 System.out.print("사칙연산 기호를 입력하세요: ");
                 operator = sc.next().charAt(0);
 
-                int result = 0;
+                double result = 0;
                 switch (operator) {
                     case '+':
                         loop = false;
@@ -54,7 +54,7 @@ public class Calculator {
                     case '/':
                         if (nums[1] != 0) {
                             loop = false;
-                            result = nums[0] / nums[1];
+                            result = (double)nums[0] / nums[1];
                             break;
                         } else {
                             System.out.println("0으로 나눌 수 없습니다.");
