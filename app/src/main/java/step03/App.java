@@ -58,7 +58,22 @@ public class App {
             } else {
                 System.out.println("제거하지 않고 넘어갑니다.");
             }
-            
+
+            System.out.println("특정 값보다 큰 결과를 조회하시겠습니까? (y/n)");
+            if (sc.next().equals("y")) {
+                System.out.println("기준 값을 입력하세요:");
+                double baseNum = sc.nextDouble();
+                ArrayList<Double> greaterResults = calculator.getResultsGreaterThan(baseNum);
+                System.out.print("기준보다 큰 결과들: [");
+                for (int i = 0; i < greaterResults.size(); i++) {
+                    System.out.printf("%.2f", greaterResults.get(i));
+                    if (i < greaterResults.size() - 1) {
+                        System.out.print(", ");
+                    }
+                }
+                System.out.println("]");
+            }
+
             System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             if (sc.next().equals("exit")) {
                 break;

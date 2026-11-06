@@ -1,6 +1,7 @@
 package step03;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class ArithmeticCalculator<T extends Number> {
 
@@ -53,5 +54,13 @@ public class ArithmeticCalculator<T extends Number> {
         if (!results.isEmpty()) {
             results.remove(0);
         }
+    }
+
+    public ArrayList<T> getResultsGreaterThan(T baseNum) {
+        double baseValue = baseNum.doubleValue();
+
+        return results.stream()
+                .filter(num -> num.doubleValue() > baseValue)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
